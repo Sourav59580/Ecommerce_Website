@@ -1,0 +1,48 @@
+@charset "utf-8";
+
+*:focus {
+  box-shadow: none !important;
+}
+
+.sidebar {
+  width: 20%;
+  height: 100%;
+  z-index: 1000;
+  padding: 20px;
+  position: fixed;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: white;
+}
+
+.page {
+  width: 80%;
+  height: 100vh;
+  padding: 40px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: rgb(197, 195, 195);
+  margin-left: 20%;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.collapse-item:hover,
+.active {
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.category-area::-webkit-scrollbar {
+  width: 8px;
+}
+
+.category-area::-webkit-scrollbar-track {
+  background-color: #ddd;
+}
+
+.category-area::-webkit-scrollbar-thumb {
+  background-color: deeppink;
+}
