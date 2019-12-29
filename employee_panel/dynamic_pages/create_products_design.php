@@ -5,7 +5,7 @@ echo '<div class="row animated fadeIn">
 <h5 class="my-3">CREATE PRODUCTS
    <i class="fa fa-circle-o-notch close fa-spin"></i>
 </h5>
-<form class="create_products_form">
+<form class="create-products-form">
 <div class="row">
    <div class="col-md-6">
        <input type="text" class="form-control mb-3" placeholder="Enter Product Title" style="border:none;background-color:#F9F9F9">
