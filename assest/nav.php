@@ -10,7 +10,12 @@
                     echo "<li class='nav-item'><a href='#' class='nav-link text-uppercase'>" . $data['category_name'] . "</a></li>";
                 }
             }
-            ?>
+            ?>  
+        </ul>
+        <ul class="navbar-nav ml-auto">
+           <li class="nav-item "><a class="nav-link"><i class="fa fa-search"></i></a></li>
+           <li class="nav-item "><a class="nav-link"><i class="fa fa-shopping-bag"></i></a></li>
+           <li class="nav-item "><a class="nav-link"><i class="fa fa-user-circle-o"></i></a></li>
         </ul>
     </nav>
 </div>
