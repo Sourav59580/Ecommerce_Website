@@ -2,6 +2,10 @@ $(document).ready(function() {
   $(".stock-update-btn").click(function() {
     $(".stock-update-btn-menu").collapse("toggle");
   });
+
+  $(".home-page-design-btn").click(function() {
+    $(".home-page-design-btn-menu").collapse("toggle");
+  });
 });
 
 //dynamic request pages coding
@@ -49,6 +53,9 @@ function dynamic_request(request_link) {
     },
     success: function(response) {
       $(".page").html(response);
+      if(request_link=='brand_information_design.php'){
+        branding_information();
+      }
 
       //create products
       $(".create-products-form").submit(function(e) {
@@ -80,8 +87,10 @@ function dynamic_request(request_link) {
             success: function(response) {
               if (response.trim() == "Successfully update data in database.") {
                 $(".create_product_progress").addClass("d-none");
-                $(".create_product_progress .progress-bar").css({width:'0%'});
-                $(".create-products-form").trigger('reset');
+                $(".create_product_progress .progress-bar").css({
+                  width: "0%"
+                });
+                $(".create-products-form").trigger("reset");
               } else {
                 alert(response);
               }
@@ -531,5 +540,99 @@ function category_list() {
         };
       }
     }
+  });
+}
+
+//braning infromation
+function branding_information() {
+  $(document).ready(function() {
+    $("#about-us").on("input", function() {
+      var length = $(this).val().length;
+      $(".about-us-count").html(length);
+    });
+  });
+
+  $(document).ready(function() {
+    $("#privacy-policy").on("input", function() {
+      var length = $(this).val().length;
+      $(".privacy-policy-count").html(length);
+    });
+  });
+
+  $(document).ready(function() {
+    $("#cookies-policy").on("input", function() {
+      var length = $(this).val().length;
+      $(".cookies-policy-count").html(length);
+    });
+  });
+
+  $(document).ready(function() {
+    $("#terms-and-condition").on("input", function() {
+      var length = $(this).val().length;
+      $(".terms-and-condition-count").html(length);
+    });
+  });
+  //branding form upload
+
+  $(document).ready(function() {
+    $(".branding-form").submit(function(e) {
+      e.preventDefault();
+      var file = document.querySelector("#brand-logo");
+      var file_size = "";
+      if (file.value == "") {
+        file_size = 0;
+      } else {
+        file_size = file.files[0].size;
+      }
+      if (200000 > file_size) {
+        $.ajax({
+          type: "POST",
+          url: "php/branding.php",
+          data: new FormData(this),
+          processData: false,
+          contentType: false,
+          cache: false,
+          success: function(response) {
+            alert(response);
+            //$(".branding-form").trigger('reset');
+          }
+        });
+      } else {
+        $("#brand-logo-message").html("Please upload file less then 200kb");
+      }
+    });
+  });
+
+  //check branding details
+  $(document).ready(function() {
+    $.ajax({
+      type: "POST",
+      url: "php/check_branding_table.php",
+      success: function(response) {
+        //console.log(response);
+        var all_data = JSON.parse(response);
+        $("#brand-name").val(all_data[0].brand_name);
+        $("#domain-name").val(all_data[0].domain_name);
+        $("#email").val(all_data[0].email);
+        $("#facebook-url").val(all_data[0].facebook_url);
+        $("#twitter-url").val(all_data[0].twitter_url);
+        $("#address").val(all_data[0].address);
+        $("#phone").val(all_data[0].phone);
+        $("#about").val(all_data[0].about_us);
+        $("#privacy-policy").val(all_data[0].privacy_policy);
+        $("#cookies-policy").val(all_data[0].cookies_policy);
+        $("#terms-and-condition").val(all_data[0].terms_and_condition);
+        $(".branding-form input,.branding-form textarea,.branding button").prop(
+          "disabled",
+          true
+        );
+
+        $(".edit-btn").click(function() {
+          $(
+            ".branding-form input,.branding-form textarea,.branding button"
+          ).prop("disabled", false);
+        });
+      }
+    });
   });
 }

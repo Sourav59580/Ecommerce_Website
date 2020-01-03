@@ -12,179 +12,92 @@
     <script src="../common_files/js/popper.min.js"></script>
     <script src="../common_files/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="./css/index.css">
     <script src="js/indexs.js"></script>
+    <style>
+
+    </style>
 </head>
 
 <body>
     <div class="container-fluid">
         <div class="sidebar">
-            <button class="btn w-100 text-left bg-light mb-4" style="font-size:20px">
+            <button class="active btn w-100 text-left bg-light mb-2 collapse-item" style="font-size:15px" access-link="brand_information_design.php">
                 <i class="fa fa-image"></i>
                 Branding details
             </button>
-            <button class="btn w-100 text-left stock-update-btn bg-light" style="font-size:20px">
+            <button class="btn w-100 text-left bg-light mb-2 home-page-design-btn" style="font-size:15px">
+                <i class="fa fa-home"></i>
+                Homepage design
+                <i class="fa fa-angle-down close mt-2"></i>
+            </button>
+            <ul class="home-page-design-btn-menu collapse">
+                <li class="border-left p-2 collapse-item" access-link="create_category_design.php">Header showcase</li>
+                <li class="border-left p-2 collapse-item" access-link="create_brands_design.php">Category showcase</li>
+            </ul>
+            <button class="btn w-100 text-left stock-update-btn bg-light" style="font-size:15px">
                 <i class="fa fa-shopping-cart"></i>
                 Stock update
                 <i class="fa fa-angle-down close mt-2"></i>
             </button>
-            <ul class="stock-update-btn-menu collapse show">
-                <li class="border-left p-2 collapse-item active" access-link="create_category_design.php">Create category</li>
+            <ul class="stock-update-btn-menu collapse">
+                <li class="border-left p-2 collapse-item" access-link="create_category_design.php">Create category</li>
                 <li class="border-left p-2 collapse-item" access-link="create_brands_design.php">Create brands</li>
                 <li class="border-left p-2 collapse-item" access-link="create_products_design.php">Creat products</li>
             </ul>
         </div>
         <div class="page">
+<!--start row coding-->
             <div class="row">
-                <div class="col-md-2"></div>
-                <div class="col-md-8 p-4 bg-white rounded-lg shadow-sm">
-                    <div>
-                        <form class="branding-form">
-                            <div class="from-group mb-3">
-                                <label class="font-weight-bold" for="brand_name">Enter Brand Name <i class="fa fa-edit edit-btn" style="cursor:pointer;color:yellowgreen">Edit details</i></label>
-                                <input type="text" name="brand-name" id="brand-name" class="form-control" placeholder="ecommerce website" />
-                            </div>
-                            <div class="from-group mb-3">
-                                <label class="font-weight-bold" for="brand_logo">Upload brand logo</label>
-                                <input type="file" name="brand-logo" class="form-control" id="brand-logo" />
-                                <span style="color:red;" id="brand-logo-message"></span>
-                            </div>
-                            <div class="from-group mb-3">
-                                <label class="font-weight-bold" for="domain_name">Enter domain name</label>
-                                <input type="text" name="domain-name" id="domain-name" class="form-control" placeholder="www.abc.com" />
-                            </div>
-                            <div class="from-group mb-3">
-                                <label class="font-weight-bold" for="email">Email</label>
-                                <input type="email" name="email" id="email" class="form-control" placeholder="www.abc@gmail.com" />
-                            </div>
-                            <div class="from-group mb-3">
-                                <label class="font-weight-bold" for="social_handels">Social handels</label>
-                                <input type="text" name="facebook" id="facebook-url" class="form-control mb-3" placeholder="facebook page url" />
-                                <input type="text" name="twitter" id="twitter-url" class="form-control" placeholder="twitter page url" />
-                            </div>
-                            <div class="from-group mb-3">
-                                <label class="font-weight-bold" for="address">Address</label>
-                                <textarea class="form-control" name="address" id="address"></textarea>
-                            </div>
-                            <div class="form-group mb-3">
-                                <label class="font-weight-bold" for="phone">Phone</label>
-                                <input type="number" name="phone" id="phone" class="form-control" placeholder="Phone number" />
-                            </div>
-                            <div class="from-group mb-3">
-                                <label class="font-weight-bold" for="about-us">About us <small class="about-us-count">0</small><small>/5000</small>
-                                </label>
-                                <textarea class="form-control" name="about-us" id="about" maxlength="5000" style="height:300px;"></textarea>
-                            </div>
-                            <div class="from-group mb-3">
-                                <label class="font-weight-bold" for="privacy-policy">Privacy policy <small class="privacy-policy-count">0</small><small>/5000</small></label>
-                                <textarea class="form-control" name="privacy-policy" id="privacy-policy" style="height:300px;" maxlength="5000"></textarea>
-                            </div>
-                            <div class="from-group mb-3">
-                                <label class="font-weight-bold" for="cookies-policy">Cookies policy <small class="cookies-policy-count">0</small><small>/5000</small></label>
-                                <textarea class="form-control" name="cookies-policy" style="height:300px;" id="cookies-policy" maxlength="5000"></textarea>
-                            </div>
-                            <div class="from-group mb-3">
-                                <label class="font-weight-bold" for="terms-and-condition">Terms and Condition <small class="terms-and-condition-count">0</small><small>/5000</small></label>
-                                <textarea class="form-control" name="terms-and-condition" style="height:300px;" id="terms-and-condition" maxlength="5000"></textarea>
-                            </div>
-                            <button class="btn btn-primary" type="submit">Submit Brand Information</button>
-                        </form>
+                <div class="col-md-4 p-4 bg-white rounded shadow-sm">
+                    <form>
+                        <div class="form-group">
+                            <label for="title-image">Title image</label>
+                            <input type="file" accept="image/*" class="form-control" name="title-image" id="title-image" />
+                        </div>
+                        <div class="form-group">
+                            <label for="title-text">Title text</label>
+                            <textarea class="form-control" rows="1" name="title-text" id="title-text"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="subtitle-text">Subtitle text</label>
+                            <textarea class="form-control" rows="5" name="subtitle-text" id="subtitle-text"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button class="btn btn-primary py-2">Add showcase</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-7 p-4 bg-white rounded shadow-sm position-relative showcase-preview">
+                    <h1 class="showcase-title target">TITLE</h1>
+                    <h4 class="showcase-subtitle target">SUBTITLE</h4>
+                    <div class="showcase-formating">
+                        <input type="color" class="color-selector bg-light" id="color-selector">
                     </div>
                 </div>
-                <div class="col-md-2"></div>
             </div>
+    <!--end row coding-->
+
         </div>
     </div>
-    <!--start lenght count-->
-    <script>
-        $(document).ready(function() {
-            $("#about-us").on("input", function() {
-                var length = $(this).val().length;
-                $(".about-us-count").html(length);
-            });
-        });
+<script>
+$(".target").click(function(event){
+    var element = event.target;
+    var index_number = $(element).index();
+    sessionStorage.setItem("index_number",index_number);
+    $(".color-selector").on("change",function(){
+        var color = this.value;
+        var index = sessionStorage.getItem("index_number");
+        var element = document.getElementsByClassName("target")[index];
+        element.style.color=color;
+        sessionStorage.removeItem("index_number");
+    })
+});
 
-        $(document).ready(function() {
-            $("#privacy-policy").on("input", function() {
-                var length = $(this).val().length;
-                $(".privacy-policy-count").html(length);
-            });
-        });
 
-        $(document).ready(function() {
-            $("#cookies-policy").on("input", function() {
-                var length = $(this).val().length;
-                $(".cookies-policy-count").html(length);
-            });
-        });
 
-        $(document).ready(function() {
-            $("#terms-and-condition").on("input", function() {
-                var length = $(this).val().length;
-                $(".terms-and-condition-count").html(length);
-            });
-        });
-        //branding form upload
-
-        $(document).ready(function() {
-            $(".branding-form").submit(function(e) {
-                e.preventDefault();
-                var file = document.querySelector("#brand-logo");
-                var file_size = "";
-                if(file.value =="")
-                {
-                  file_size=0;
-                }
-                else{
-                    file_size = file.files[0].size;
-                } 
-                if (200000 > file_size) {
-                    $.ajax({
-                        type: "POST",
-                        url: "php/branding.php",
-                        data: new FormData(this),
-                        processData: false,
-                        contentType: false,
-                        cache: false,
-                        success: function(response) {
-                            alert(response);
-                            //$(".branding-form").trigger('reset');
-                        }
-                    });
-                } else {
-                    $("#brand-logo-message").html("Please upload file less then 200kb");
-                }
-            })
-        });
-
-        //check branding details
-        $(document).ready(function() {
-            $.ajax({
-                type: "POST",
-                url: "php/check_branding_table.php",
-                success: function(response) {
-                    //console.log(response);
-                    var all_data = JSON.parse(response);
-                    $("#brand-name").val(all_data[0].brand_name);
-                    $("#domain-name").val(all_data[0].domain_name);
-                    $("#email").val(all_data[0].email);
-                    $("#facebook-url").val(all_data[0].facebook_url);
-                    $("#twitter-url").val(all_data[0].twitter_url);
-                    $("#address").val(all_data[0].address);
-                    $("#phone").val(all_data[0].phone);
-                    $("#about").val(all_data[0].about_us);
-                    $("#privacy-policy").val(all_data[0].privacy_policy);
-                    $("#cookies-policy").val(all_data[0].cookies_policy);
-                    $("#terms-and-condition").val(all_data[0].terms_and_condition);
-                    $(".branding-form input,.branding-form textarea,.branding button").prop("disabled",true);
-
-                    $(".edit-btn").click(function(){
-                        $(".branding-form input,.branding-form textarea,.branding button").prop("disabled",false);
-                    });
-                }
-            });
-        });
-    </script>
+</script>
 
 </body>
 

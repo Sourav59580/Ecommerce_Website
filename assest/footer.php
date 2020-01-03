@@ -9,14 +9,13 @@ $website = $data['domain_name'];
 $facebook = $data['facebook_url'];
 $twitter = $data['twitter_url'];
 
-
 ?>
     <div class="container-fluid bg-white border-top py-3" style="margin-top: 100px">
         <div class="container d-flex justify-content-between">
             <div class="input-group w-50">
                 <input type="email" class="form-control" placeholder="email@gmail.com" name="subcribed-email" />
                 <div class="input-group-append">
-                    <span class="input-group-text">SUBSCRIBE</span>
+                    <span class="input-group-text subscribe-btn">SUBSCRIBE</span>
                 </div>
             </div>
             <div class="btn-group">
@@ -45,9 +44,9 @@ $twitter = $data['twitter_url'];
                 <div class="col-1"></div>
                 <div class="col-3">
                     <h5 class="text-light">POLICY</h5>
-                    <a href="#" class="d-block my-2">Privacy policy</a>
-                    <a href="#" class="d-block my-2">Cookies policy</a>
-                    <a href="#" class="d-block my-2">Terms and condition</a>
+                    <a href="privacy.php" class="d-block my-2">Privacy policy</a>
+                    <a href="cookies.php" class="d-block my-2">Cookies policy</a>
+                    <a href="terms.php" class="d-block my-2">Terms and condition</a>
                 </div>
                 <div class="col-1"></div>
                 <div class="col-4">
@@ -61,3 +60,10 @@ $twitter = $data['twitter_url'];
 
         </div>
     </div>
+
+    <script>
+     function demo()
+     {
+         
+     }
+    </script>

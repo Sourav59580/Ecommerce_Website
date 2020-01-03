@@ -1,12 +1,10 @@
 <?php
 $get_branding_data = "SELECT * FROM branding";
 $response = $db->query($get_branding_data);
+$data ="";
 if ($response) {
     $data = $response->fetch_assoc();
-    $brand_name = $data['brand_name'];
 }
-
-
 ?>
 
 <div class="container-fluid shadow-sm bg-white" style="box-shadow: 0px 0px 5px rgba(0, 0, 0, .5);">
@@ -17,7 +15,7 @@ if ($response) {
                 $logo_string = base64_encode($data['brand_logo']);
                 $complete_url = "data:image/png;base64,".$logo_string;
                 echo "<img src='".$complete_url."' style='width:30px;'>";
-                echo $brand_name 
+                echo $data['brand_name']; 
                 ?>
             </a>
             <li class="nav-item mt-3"><a href="#" class="nav-link">HOME</a></li>
@@ -31,10 +29,16 @@ if ($response) {
             }
             ?>
         </ul>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item "><a class="nav-link"><i class="fa fa-search"></i></a></li>
-            <li class="nav-item "><a class="nav-link"><i class="fa fa-shopping-bag"></i></a></li>
-            <li class="nav-item "><a class="nav-link"><i class="fa fa-user-circle-o"></i></a></li>
-        </ul>
+        <div class="btn-group ml-auto mr-5">
+            <button class="btn border bg-white" style="box-shadow: none;"><i class="fa fa-search"></i></button>
+            <button class="btn border bg-white" style="box-shadow: none;"><i class="fa fa-shopping-bag"></i></button>
+            <button class="btn border bg-white dropdown" style="box-shadow: none;">
+                <i class="fa fa-user-circle-o" data-toggle="dropdown"></i>
+                <div class="dropdown-menu">
+                    <a href="signup.php" class="dropdown-item"><i class="fa fa-user"> </i> Signup</a>
+                    <a href="signin.php" class="dropdown-item"><i class="fa fa-sign-in"> </i> Signin</a>
+                </div>
+            </button>
+        </div>
     </nav>
 </div>

@@ -35,7 +35,7 @@ if ($response) {
         $response = $db->query($update_data);
         if ($response) {
             
-            echo "Edit success".$phone;
+            echo "Edit success";
         } else {
             echo "Failed edit";
         }
