@@ -21,7 +21,13 @@ require_once("./common_files/database/database.php");
 
 <body class="bg-light">
     <?php
-     include_once("./assest/nav.php");
+    include_once("./assest/nav.php");
+    ?>
+
+
+
+    <?php
+    include_once("./assest/footer.php");
     ?>
 
 </body>
