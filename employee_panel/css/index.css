@@ -44,3 +44,13 @@ ul {
   height: 60px;
   background-color: black;
 }
+.target::selection{
+  background-color: inherit;
+}
+.target {
+  position: absolute;
+  z-index: 2;
+}
+.showcase-subtitle{
+  top :80px;
+}
