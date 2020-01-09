@@ -50,7 +50,7 @@
             <!--start row coding-->
             <div class="row">
                 <div class="col-md-4 p-4 bg-white rounded shadow-sm">
-                    <form>
+                    <form class="showcase-form">
                         <div class="form-group">
                             <label for="title-image">Title image <span>200kb (1920*978)</span></label>
                             <input type="file" accept="image/*" class="form-control" name="title-image" id="title-image" />
@@ -64,14 +64,16 @@
                             <textarea class="form-control" rows="5" name="subtitle-text" id="subtitle-text" maxlength="100"></textarea>
                         </div>
                         <div class="form-group">
-                            <button class="btn btn-primary py-2">Add showcase</button>
+                            <button class="btn btn-primary py-2" type="submit">Add showcase</button>
                         </div>
                     </form>
                 </div>
                 <div class="col-md-1"></div>
-                <div class="col-md-7 p-4 bg-white rounded shadow-sm position-relative showcase-preview">
-                    <h1 class="showcase-title target">TITLE</h1>
-                    <h4 class="showcase-subtitle target">SUBTITLE</h4>
+                <div class="col-md-7 p-4 bg-white rounded shadow-sm position-relative showcase-preview d-flex">
+                    <div class="title-box">
+                        <h1 class="showcase-title target">TITLE</h1>
+                        <h4 class="showcase-subtitle target">SUBTITLE</h4>
+                    </div>
                     <div class="showcase-view"></div>
                     <div class="showcase-formating d-flex justify-content-around align-items-center w-100">
                         <div class="btn-group">
@@ -79,22 +81,21 @@
                             <button class="btn bg-light"><input type="color" class="color-selector bg-light" id="color-selector"></button>
                         </div>
                         <div class="btn-group">
-                            <button class="btn btn-light">Font size</button>
-                            <button class="btn bg-light"><input type="number" class="font-size w-50" id="font-size"></button>
-                        </div>
-                        <div class="btn-group">
-                            <button class="btn btn-light">Align</button>
-                            <button class="btn btn-light">
-                                <i class="fa fa-align-left"></i>
-                            </button>
-                            <button class="btn btn-light">
-                                <i class="fa fa-align-center"></i>
-                            </button>
-                            <button class="btn btn-light">
-                                <i class="fa fa-align-right"></i>
-                            </button>
+                            <button class="btn btn-light">Size</button>
+                            <button class="btn bg-light"><input type="range" min="100" max="500" class="font-size w-100" id="font-size"></button>
                         </div>
 
+                        <button class="btn btn-light dropdown-toggle" data-toggle="dropdown">
+                            <span>Alignment</span>
+                            <div class="dropdown-menu">
+                                <span class="dropdown-item alignment" align_position="h" align_value="flex-start">Left</span>
+                                <span class="dropdown-item alignment" align_position="h" align_value="center">Center</span>
+                                <span class="dropdown-item alignment" align_position="h" align_value="flex-end">Right</span>
+                                <span class="dropdown-item alignment" align_position="v" align_value="flex-start">Top</span>
+                                <span class="dropdown-item alignment" align_position="v" align_value="center">V-center</span>
+                                <span class="dropdown-item alignment" align_position="v" align_value="flex-end">Bottom</span>
+                            </div>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -142,7 +143,12 @@
             var index = sessionStorage.getItem("index_number");
             var element = document.getElementsByClassName("target")[index];
             element.style.color = color;
-            sessionStorage.removeItem("index_number");
+        })
+        $(".font-size").on("input", function() {
+            var size = this.value;
+            var index = sessionStorage.getItem("index_number");
+            var element = document.getElementsByClassName("target")[index];
+            element.style.fontSize = size + "%";
         })
         //start title image upload
         $(document).ready(function() {
@@ -188,6 +194,98 @@
                 $(".subtitle-limit").html(length);
             });
         })
+        //add showcase data
+        $(document).ready(function() {
+            $(".showcase-form").submit(function(e) {
+                e.preventDefault();
+                var title = document.querySelector(".showcase-title");
+                var subtitle = document.querySelector(".showcase-subtitle");
+                var file = document.querySelector("#title-image").files[0];
+                var title_color = "";
+                var title_size = "";
+                if (title.style.color == "") {
+                    title_color = "black";
+                } else {
+                    title_color = title.style.color;
+                }
+                if (title.style.fontSize == "") {
+                    title_size = "300%";
+                } else {
+                    title_size = title.style.fontSize;
+                }
+
+                var subtitle_color = "";
+                var subtitle_size = "";
+                if (subtitle.style.color == "") {
+                    subtitle_color = "black";
+                } else {
+                    subtitle_color = subtitle.style.color;
+                }
+                if (subtitle.style.fontSize == "") {
+                    subtitle_size = "300%";
+                } else {
+                    subtitle_size = subtitle.style.fontSize;
+                }
+
+                var flex_box = document.querySelector(".showcase-preview");
+                var h_align = "";
+                var v_align = "";
+                if (flex_box.style.justifyContent == "") {
+                    h_align = "center"
+                } else {
+                    h_align = flex_box.style.justifyContent;
+                }
+                if (flex_box.style.alignItems == "") {
+                    v_align = "center"
+                } else {
+                    v_align = flex_box.style.alignItems;
+                }
+
+                var css_data = {
+                    title_size : title_size,
+                    title_color : title_color,
+                    subtitle_size : subtitle_size,
+                    subtitle_color : subtitle_color,
+                    h_align : h_align,
+                    v_align : v_align,
+                    title_text : title.innerHTML,
+                    subtitle_text : subtitle.innerHTML   
+                }
+                var formdata = new FormData();
+                formdata.append("file_data",file);
+                formdata.append("css_data",JSON.stringify(css_data));
+
+                $.ajax({
+                    type: "POST",
+                    url: "php/header_showcase.php",
+                    data: formdata,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function(response) {
+                        alert(response);
+                    }
+                });
+            });
+        });
+        //alignment
+        $(document).ready(function() {
+            $(".alignment").each(function() {
+                $(this).click(function() {
+                    var align_position = $(this).attr("align_position");
+                    var align_value = $(this).attr("align_value");
+                    if (align_position == "h") {
+                        $(".showcase-preview").css({
+                            justifyContent: align_value
+                        })
+                    } else if (align_position == "v") {
+                        $(".showcase-preview").css({
+                            alignItems: align_value
+                        })
+                    }
+                });
+            });
+        });
     </script>
 
 </body>

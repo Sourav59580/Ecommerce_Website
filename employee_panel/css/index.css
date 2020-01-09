@@ -47,7 +47,7 @@ ul {
 .target::selection{
   background-color: inherit;
 }
-.target {
+.title-box {
   position: absolute;
   z-index: 2;
 }
