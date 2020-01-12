@@ -64,6 +64,32 @@
                             <textarea class="form-control" rows="5" name="subtitle-text" id="subtitle-text" maxlength="100"></textarea>
                         </div>
                         <div class="form-group">
+                            <label for="create-button">Create Button</label>
+                            <div class="input-group mb-3" id="create-button">
+                             <input type="url" class="form-control btn-url" name="btn-url" placeholder="http://www.google.com">
+                             <input type="text" class="form-control btn-name" name="btn-name" placeholder="Button 1">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text">BG Color</label>
+                                </div>
+                                <input type="color" name="btn-bgcolor" class="form-control py-3 h-100 btn-bgcolor">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text">Text Color</label>
+                                </div>
+                                <input type="color" name="btn-textcolor" class="form-control py-3 h-100 btn-textcolor">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend"><span class="input-group-text">Size</span></div>
+                                <select class="form-control btn-size">
+                                    <option value="14px">Small</option>
+                                    <option value="18px">Medium</option>
+                                    <option value="24px">Large</option>
+                                </select>
+                                <div class="input-group-append"><span class="input-group-text bg-danger text-light add-btn">Add</span></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <button class="btn btn-primary py-2" type="submit">Add showcase</button>
                         </div>
                     </form>
@@ -73,6 +99,7 @@
                     <div class="title-box">
                         <h1 class="showcase-title target">TITLE</h1>
                         <h4 class="showcase-subtitle target">SUBTITLE</h4>
+                        <div class="title-buttons"></div>
                     </div>
                     <div class="showcase-view"></div>
                     <div class="showcase-formating d-flex justify-content-around align-items-center w-100">
@@ -249,8 +276,10 @@
                     h_align : h_align,
                     v_align : v_align,
                     title_text : title.innerHTML,
-                    subtitle_text : subtitle.innerHTML   
+                    subtitle_text : subtitle.innerHTML,
+                    buttons : $(".title-buttons").html().trim()   
                 }
+                console.log(css_data);
                 var formdata = new FormData();
                 formdata.append("file_data",file);
                 formdata.append("css_data",JSON.stringify(css_data));
@@ -285,6 +314,22 @@
                     }
                 });
             });
+        });
+        //add button coding
+        $(document).ready(function(){
+          $(".add-btn").click(function(){
+              var button = document.createElement("BUTTON");
+              button.className = "btn py-1 mr-2";
+              button.style.backgroundColor = $(".btn-bgcolor").val(); 
+              var a = document.createElement("A");
+              a.innerHTML = $(".btn-name").val();
+              a.href = $(".btn-url").val();
+              a.style.color = $(".btn-textcolor").val();
+              a.style.fontSize = $(".btn-size").val();
+              button.append(a);
+              $(".title-buttons").append(button);
+
+          });
         });
     </script>
 
