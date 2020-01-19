@@ -20,9 +20,12 @@ require("../../common_files/database/database.php");
 
  $buttons = addslashes($all_data['buttons']);
 
- $check_data = "SELECT * FROM header_showcase";
+ $check_data = "SELECT count(id) AS result FROM header_showcase";
  $response = $db->query($check_data);
  if($response){
+  $data = $response->fetch_assoc();
+  $count = $data['result'];
+  if($count<3){
     $data_insert = "INSERT INTO header_showcase(title_image,title_text,title_color,title_size,subtitle_text,
          subtitle_color,subtitle_size,h_align,v_align,buttons)VALUES('$files_binary','$title_text','$title_color',
          '$title_size','$subtitle_text','$subtitle_color','$subtitle_size','$h_align','$v_align','$buttons')";
@@ -33,16 +36,20 @@ require("../../common_files/database/database.php");
          else{
              echo "failed";
          }
+        }
+  else if($count>=3){
+    echo "Limit full";
+  }
  }
  else{
      $create_table = "CREATE TABLE header_showcase(
          id INT(11) NOT NULL AUTO_INCREMENT,
          title_image MEDIUMBLOB,
          title_text VARCHAR(255),
-         title_color VARCHAR(10),
+         title_color VARCHAR(20),
          title_size VARCHAR(10),
          subtitle_text VARCHAR(255),
-         subtitle_color VARCHAR(10),
+         subtitle_color VARCHAR(20),
          subtitle_size VARCHAR(10),
          h_align VARCHAR(20),
          v_align VARCHAR(20),
@@ -67,20 +74,3 @@ require("../../common_files/database/database.php");
          echo "Failed to create table";
      }
  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-?>

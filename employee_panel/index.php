@@ -32,8 +32,8 @@
                 <i class="fa fa-angle-down close mt-2"></i>
             </button>
             <ul class="home-page-design-btn-menu collapse">
-                <li class="border-left p-2 collapse-item" access-link="create_category_design.php">Header showcase</li>
-                <li class="border-left p-2 collapse-item" access-link="create_brands_design.php">Category showcase</li>
+                <li class="border-left p-2 collapse-item" access-link="header-showcase_design.php">Header showcase</li>
+                <li class="border-left p-2 collapse-item" access-link="category_showcase_design.php">Category showcase</li>
             </ul>
             <button class="btn w-100 text-left stock-update-btn bg-light" style="font-size:15px">
                 <i class="fa fa-shopping-cart"></i>
@@ -91,11 +91,12 @@
                         </div>
                         <div class="form-group">
                             <button class="btn btn-primary py-2" type="submit">Add showcase</button>
+                            <button class="btn btn-primary py-2 showcase-preview-btn" type="button">Showcase view</button>
                         </div>
                     </form>
                 </div>
                 <div class="col-md-1"></div>
-                <div class="col-md-7 p-4 bg-white rounded shadow-sm position-relative showcase-preview d-flex">
+                <div class="col-md-7 p-4 bg-white rounded shadow-sm position-relative showcase-preview d-flex" style="height: 360px;">
                     <div class="title-box">
                         <h1 class="showcase-title target">TITLE</h1>
                         <h4 class="showcase-subtitle target">SUBTITLE</h4>
@@ -330,6 +331,27 @@
               $(".title-buttons").append(button);
 
           });
+        });
+        //showcase view 
+        $(document).ready(function(){
+            var file = document.querySelector("#title-image").files[0];
+            var formdata = new FormData();
+            formdata.append("photo",file);
+            var flex_box = document.querySelector(".showcase-preview");
+                var h_align = "";
+                var v_align = "";
+                if (flex_box.style.justifyContent == "") {
+                    h_align = "center"
+                } else {
+                    h_align = flex_box.style.justifyContent;
+                }
+                if (flex_box.style.alignItems == "") {
+                    v_align = "center"
+                } else {
+                    v_align = flex_box.style.alignItems;
+                }
+            var array =[$(".title-box").html().trim(),h_align,v_align];
+            formdata.append("data",JSON.stringify(array));
         });
     </script>
 

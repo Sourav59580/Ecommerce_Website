@@ -25,6 +25,18 @@ require_once("./common_files/database/database.php");
     include_once("./assest/nav.php");
     ?>
 
+    <div class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+            <img src="./photo-1499084732479-de2c02d45fcc.jpg" class="w-100 d-block h-50"/>
+            </div>
+            <div class="carousel-item">
+                <img src="./photo-1499084732479-de2c02d45fcc.jpg" class="w-100 d-block"/>
+            </div>
+
+        </div>
+    </div>
+    
 
 
     <?php
